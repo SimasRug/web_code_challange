@@ -10,7 +10,9 @@ export class Router extends React.Component {
         return (
           <BrowserRouter>
               <Route exact path='/' component={Products}/>
-              <Route exact path='/product/:id' component={Product}/>
+              <Route path='/product/:id' component={Product}/>
+              {/* TODO look into this. React state update on an unmounted component.*/}
+              {/*<Redirect to='/'/>*/}
           </BrowserRouter>
         );
     }

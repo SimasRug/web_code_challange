@@ -1,5 +1,11 @@
 import React from 'react';
-import {getProduct, getReviews, postReview} from "../../services/apiService";
+import {getProduct, getReviews} from '../../services/apiService';
+import {ReviewFrom} from './reviewForm/reiviewForm';
+import {Review} from './review/review';
+import {Link} from 'react-router-dom';
+import './product.css';
+import  {TiChevronLeft} from 'react-icons/ti'
+import {Spinner} from "../spinner/spinner";
 
 export class Product extends React.Component {
     constructor(props) {
@@ -8,13 +14,9 @@ export class Product extends React.Component {
             product: {},
             error: false,
             reviews: [],
-            rating: 0,
-            review: '',
-            reviewSub: { reviewDone: false, error: false, message: '' }
+            isLoading: true,
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
@@ -23,67 +25,52 @@ export class Product extends React.Component {
         const product = await getProduct(id);
         const reviews = await getReviews(id)
         this.setState({
+            isLoading: false,
             error: product.error || false,
             product: !product.error ? product : {},
-            reviews
+            // this filter is only to get rid of the empty submission values
+            reviews: reviews.filter(product => product.text),
         });
 
     }
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        const post = await postReview(this.props.match.params.id, this.state.rating, this.state.review);
-        this.setState( {reviewSub: { reviewDone: true, error: post.error, message: post.message }});
-    }
-
-    handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-    }
-
     showReviews() {
-        return this.state.reviews.map((val, index) => (<div key={index}>{val.text}</div>))
+
+        if (this.state.reviews.length) {
+            return this.state.reviews.map((val, index) => (
+                <Review key={index} {...val} />
+            ));
+        }
     }
 
-    showReviewFrom() {
-        const {rating, review, reviewSub: { reviewDone, error, message } } = this.state;
-        if(!reviewDone) {
-            return (
-                <form onSubmit={this.handleSubmit}>
-                <label>
-                    Rating:
-                    <input type="number" min="0" max="5" name="rating" value={rating} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Name:
-                    <textarea value={review} name="review" onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form> );
-        }
-        if(reviewDone && error) {
-            return (<h2>{message}</h2>)
-        }
-        if(reviewDone && !error) {
-            return (<h2> Thanks for your review. ;) </h2>)
-        }
-    }
 
     render() {
-        const {error} = this.state;
+        const {error, isLoading, product: {imgUrl, description, name, currency, price}} = this.state;
+
         if (error) {
             return (<h1>Error happened please try again later</h1>)
         }
-        const {product: {imgUrl, description, name, currency, price} } = this.state;
+
+        if(isLoading) {
+            return (<Spinner/>)
+        }
+
         return (
-            <div>
-                <img src={imgUrl} alt={description}/>
-                <h1>{name}</h1>
-                <h2>{currency}{price}</h2>
-                <h3>{description}</h3>
-                <div>
-                    {this.showReviewFrom()}
+            <div className='container'>
+                <div className='link'>
+                    <TiChevronLeft/>
+                    <Link to='/' > Back</Link>
                 </div>
-                <div>
+                <div className='item-container'>
+                    <img src={imgUrl} alt={description}/>
+                    <div className='product-info'>
+                            <div className='product-name'>{name}</div>
+                            <div className='product-price'>{currency}{price}</div>
+                            <p>{description}</p>
+                    </div>
+                </div>
+                <ReviewFrom id={this.props.match.params.id}/>
+                <div className='customer-reviews'>
                     {this.showReviews()}
                 </div>
             </div>

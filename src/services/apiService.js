@@ -1,33 +1,34 @@
 async function getProducts() {
-    return await get(`http://localhost:3001/product`)
+    return await get(process.env.REACT_APP_BASE_PRODUCT_URL);
 }
 
 async function getProduct(id) {
-    return await get(`http://localhost:3001/product/${id}`)
+    return await get(`${process.env.REACT_APP_BASE_PRODUCT_URL}/${id}`)
 }
 
 async function getReviews(id) {
-    return await get(`http://localhost:3002/reviews/${id}`)
+    return await get(`${process.env.REACT_APP_BASE_REVIEW_URL}/${id}`)
 
 }
 
-function postReview(productId, rating, text) {
+async function postReview(productId, rating, text) {
     const body = JSON.stringify({
         productId,
         rating,
-        locale: "en-US,en;q=0.9,ru;q=0.8,en-GB;q=0.7,nl;q=0.6,lt;q=0.5",
+        locale: 'en-US,en;q=0.9,ru;q=0.8,en-GB;q=0.7,nl;q=0.6,lt;q=0.5',
         text,
     });
+
     // TODO Gives a 201 but does not work properly when called maybe a cors thing
-    return fetch(`http://localhost:3002/reviews/${productId}`, {
+    return await fetch(`${process.env.REACT_APP_BASE_REVIEW_URL}/${productId}`, {
         method: 'POST',
         body: body,
     })
-        .then( val => {
-            if(val.status === 201) {
+        .then(val => {
+            if (val.status === 201) {
                 return {error: false, message: 'success'}
             }
-            return { error: true, message: 'Something went wrong please try again' }
+            return {error: true, message: 'Something went wrong please try again'}
         })
 
 }
@@ -43,5 +44,6 @@ module.exports = {
     getProducts,
     getProduct,
     getReviews,
-    postReview
+    postReview,
+    get
 }

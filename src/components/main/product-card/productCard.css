@@ -1,0 +1,61 @@
+.img-price-container {
+    height: 250px;
+    width: 250px;
+    overflow: hidden;
+}
+
+.img-price-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.product-card {
+    margin: 5px;
+}
+
+.product-card:hover {
+    border: 1px solid black;
+    margin: 4px;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+.img-price-container {
+    position: relative;
+}
+
+.price {
+    position: absolute;
+    background: white;
+    color: black;
+    left: 10px;
+    width: 30px;
+    padding: 5px;
+    bottom: 5px;
+    /*Not a big fan of this, find a better way*/
+    z-index: 1;
+}
+
+.product-card:hover .price {
+    bottom: 10px;
+}
+
+.name {
+    padding: 10px 0 0 10px;
+}
+
+.description {
+    padding: 10px 0 10px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 250px;
+}
