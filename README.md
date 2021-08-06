@@ -32,3 +32,4 @@ Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app 
 - I would usually not commit `.env` file but, considering this is just for demonstration purposes. There's no harm.
 - Having issues with `apiService.js` `POST` call. It seems to successfully complete the request, after looking at the request body. I don't see the passed parameters. 
 I'm either missing something in the API documentation. Or it's a `cors origin` issue. Or something with API itself. Not sure.
+-Should've pain more attention to specific versions of react, running into all sorts of problems with `Enzyme`

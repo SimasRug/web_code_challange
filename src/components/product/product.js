@@ -1,5 +1,5 @@
 import React from 'react';
-import {getProduct, getReviews} from '../../services/apiService';
+import apiService from '../../services/apiService';
 import {ReviewFrom} from './reviewForm/reiviewForm';
 import {Review} from './review/review';
 import {Link} from 'react-router-dom';
@@ -22,8 +22,8 @@ export class Product extends React.Component {
 
     async componentDidMount() {
         const id = this.props.match.params.id;
-        const product = await getProduct(id);
-        const reviews = await getReviews(id)
+        const product = await apiService.getProduct(id);
+        const reviews = await apiService.getReviews(id)
         this.setState({
             isLoading: false,
             error: product.error || false,

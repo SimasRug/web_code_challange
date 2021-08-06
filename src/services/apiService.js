@@ -1,17 +1,16 @@
-async function getProducts() {
-    return await get(process.env.REACT_APP_BASE_PRODUCT_URL);
+const getProducts = async () => {
+    return await apiService.get(process.env.REACT_APP_BASE_PRODUCT_URL);
 }
 
-async function getProduct(id) {
-    return await get(`${process.env.REACT_APP_BASE_PRODUCT_URL}/${id}`)
+const getProduct = async (id) => {
+    return await apiService.get(`${process.env.REACT_APP_BASE_PRODUCT_URL}/${id}`)
 }
 
-async function getReviews(id) {
-    return await get(`${process.env.REACT_APP_BASE_REVIEW_URL}/${id}`)
-
+const getReviews = async (id) => {
+    return await apiService.get(`${process.env.REACT_APP_BASE_REVIEW_URL}/${id}`)
 }
 
-async function postReview(productId, rating, text) {
+const postReview = async (productId, rating, text) => {
     const body = JSON.stringify({
         productId,
         rating,
@@ -33,17 +32,20 @@ async function postReview(productId, rating, text) {
 
 }
 
-function get(url) {
+const get = (url) => {
     return fetch(url)
         .then(res => res.json())
         .then(res => res)
         .catch(e => ({error: true, message: e}));
 }
 
-module.exports = {
+
+const apiService = {
     getProducts,
     getProduct,
     getReviews,
     postReview,
     get
 }
+
+export default apiService;

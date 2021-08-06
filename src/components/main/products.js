@@ -1,6 +1,6 @@
 import React from 'react';
-import {ProductCard} from './product-card/product-card';
-import {getProducts} from '../../services/apiService';
+import {ProductCard} from './product-card/productCard';
+import apiService from '../../services/apiService';
 import './products.css';
 import {Link} from 'react-router-dom';
 import {Spinner} from '../spinner/spinner';
@@ -17,7 +17,7 @@ export class Products extends React.Component {
     }
 
     async componentDidMount() {
-        const products = await getProducts();
+        const products = await apiService.getProducts();
         this.setState({
             error: products.error || false,
             data: !products.error ? products.filter(product => product.id) : [],
