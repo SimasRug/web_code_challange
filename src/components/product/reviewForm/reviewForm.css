@@ -3,8 +3,12 @@ form {
     flex-direction: column;
 }
 
+
+.textarea-wrapper {
+    max-width: 320px;
+}
 textarea {
-    width: 320px;
+    width: 100%;
     height: 250px;
     resize: none;
     padding: 0;

@@ -32,21 +32,25 @@ export class Products extends React.Component {
         if (error) {
             return (<h1>Error happened please try again later</h1>)
         }
-        if(isLoading) {
+        if (isLoading) {
             return (<Spinner/>)
         }
         // Kinda useless filter considering every product is called 'product', but works if it has proper naming
-        const products = data.filter(data => (searchTerm === '' ||  data.name.includes(searchTerm)))
+        const products = data.filter(data => (searchTerm === '' || data.name.includes(searchTerm)))
             .map((data, index) =>
-            // need index because some id's are the same
-            <Link to={`/product/${data.id}`} key={data.id + index} >
-                <ProductCard {...data} />
-            </Link>
-    )
+                // need index because some id's are the same
+                <Link to={`/product/${data.id}`} key={data.id + index}>
+                    <ProductCard {...data} />
+                </Link>
+            )
         return (<div>
-            <input className='search-field' type='text' placeholder='Search for product' onChange={({target: {value}}) => {
-                this.setState({ searchTerm: value })
-            }}/>
+            <div className='search-wrapper'>
+            <input className='search-field' type='text' placeholder='Search for product'
+                   onChange={({target: {value}}) => {
+                       this.setState({searchTerm: value})
+                   }}
+            />
+            </div>
             <div className="element-wrapper">{products}</div>
         </div>)
     }

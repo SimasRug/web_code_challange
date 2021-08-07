@@ -6,7 +6,8 @@
 }
 
 .search-field {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 30px;
     margin: 15px;
     border: none;
@@ -14,4 +15,9 @@
     padding: 5px;
     outline: none;
     border-bottom: 1px solid black;
+}
+
+.search-wrapper {
+    display: flex;
+    justify-content: center;
 }

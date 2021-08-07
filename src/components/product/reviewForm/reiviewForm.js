@@ -45,9 +45,11 @@ export class ReviewFrom extends React.Component {
                                     activeColor={'black'}
                                     onChange={(rating) => this.setState({rating})}/>
                     </label>
-                    <label>
-                        <textarea value={review} name="review" required onChange={this.handleChange}/>
-                    </label>
+                    <div className='textarea-wrapper'>
+                        <label>
+                            <textarea value={review} name="review" required onChange={this.handleChange}/>
+                        </label>
+                    </div>
                     <input className='submit-button' type="submit" value="Submit"/>
                 </form>);
         }
