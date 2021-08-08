@@ -36,4 +36,5 @@ Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app 
 I'm either missing something in the API documentation. Or it's a `cors origin` issue. Or something with API itself. Not sure.
 
 
-- Should've pain more attention to specific versions of react, running into all sorts of problems with `Enzyme`
+- Should've pain more attention to specific versions of react, running into all sorts of problems with `Enzyme`. I know `@wojtekmaj/enzyme-adapter-react-17` is not an official package.
+But it works for this case.
