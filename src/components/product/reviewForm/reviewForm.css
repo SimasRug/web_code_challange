@@ -24,7 +24,7 @@ textarea {
     border: 1px solid black;
 }
 
-.review-button:hover, .submit-button {
+.review-button:hover, .submit-button:hover {
     height: 49px;
     border: 2px solid black;
     box-shadow: 2px 2px #c4c4c4;

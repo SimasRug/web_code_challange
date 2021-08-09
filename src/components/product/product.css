@@ -19,6 +19,9 @@
     text-align: left;
     flex-grow: 1;
     margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .link {
@@ -64,6 +67,19 @@
     /*justify-content: flex-start;*/
     /*align-items: center;*/
     margin: 0 20px;
+}
+
+.add-to-basket {
+    width: 150px;
+    height: 50px;
+    background: white;
+    border: 1px solid black;
+}
+
+.add-to-basket:hover {
+    height: 49px;
+    border: 2px solid black;
+    box-shadow: 2px 2px #c4c4c4;
 }
 
 

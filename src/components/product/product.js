@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import apiService from '../../services/apiService';
 import {ReviewFrom} from './reviewForm/reiviewForm';
 import {Review} from './review/review';
@@ -6,8 +7,9 @@ import {Link} from 'react-router-dom';
 import './product.css';
 import {TiChevronLeft} from 'react-icons/ti'
 import {Spinner} from '../spinner/spinner';
+import {addItem} from "../../redux/actions";
 
-export class Product extends React.Component {
+class Product extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,9 +45,13 @@ export class Product extends React.Component {
         }
     }
 
+    addToBasket(item) {
+        this.props.addItem(item);
+    }
+
 
     render() {
-        const {error, isLoading, product: {imgUrl, description, name, currency, price}} = this.state;
+        const {error, isLoading, product: {imgUrl, description, name, currency, price, id}} = this.state;
 
         if (error) {
             return (<h1>Error happened please try again later</h1>)
@@ -67,6 +73,9 @@ export class Product extends React.Component {
                         <div className='product-name'>{name}</div>
                         <div className='product-price'>{currency}{price}</div>
                         <p className='product-description'>{description}</p>
+                        <button className='add-to-basket'
+                                onClick={() => this.addToBasket({imgUrl, name, currency, price, id})}>Add to basket
+                        </button>
                     </div>
                 </div>
                 <ReviewFrom id={this.props.match.params.id}/>
@@ -77,3 +86,5 @@ export class Product extends React.Component {
         )
     }
 }
+
+export default connect(null, {addItem})(Product);

@@ -1,8 +1,8 @@
-import {Product} from '../components/product/product';
+import Product from '../components/product/product';
 import {shallow} from 'enzyme';
 import apiService from '../services/apiService';
 
-
+// TODO, broken after adding state,
 describe('Testing product component', () => {
     let component;
 
