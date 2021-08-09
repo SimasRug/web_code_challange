@@ -4,7 +4,7 @@ import {ReviewFrom} from './reviewForm/reiviewForm';
 import {Review} from './review/review';
 import {Link} from 'react-router-dom';
 import './product.css';
-import  {TiChevronLeft} from 'react-icons/ti'
+import {TiChevronLeft} from 'react-icons/ti'
 import {Spinner} from '../spinner/spinner';
 
 export class Product extends React.Component {
@@ -51,7 +51,7 @@ export class Product extends React.Component {
             return (<h1>Error happened please try again later</h1>)
         }
 
-        if(isLoading) {
+        if (isLoading) {
             return (<Spinner/>)
         }
 
@@ -59,14 +59,14 @@ export class Product extends React.Component {
             <div className='container'>
                 <div className='link'>
                     <TiChevronLeft/>
-                    <Link to='/' > Back</Link>
+                    <Link to='/'> Back</Link>
                 </div>
                 <div className='item-container'>
                     <img src={imgUrl} alt={description}/>
                     <div className='product-info'>
-                            <div className='product-name'>{name}</div>
-                            <div className='product-price'>{currency}{price}</div>
-                            <p className='product-description' >{description}</p>
+                        <div className='product-name'>{name}</div>
+                        <div className='product-price'>{currency}{price}</div>
+                        <p className='product-description'>{description}</p>
                     </div>
                 </div>
                 <ReviewFrom id={this.props.match.params.id}/>
