@@ -1,13 +1,15 @@
 import Product from '../components/product/product';
 import {shallow} from 'enzyme';
 import apiService from '../services/apiService';
+import store from '../redux/store';
 
 // TODO, broken after adding state,
 describe('Testing product component', () => {
     let component;
 
     beforeEach(() => {
-        component = shallow(<Product {...{match: {params: {id: 'HI334'}}}}/>, {disableLifecycleMethods: true});
+        component = shallow(<Product store={store} {...{match: {params: {id: 'HI334'}}}}/>,
+            {disableLifecycleMethods: true}).shallow();
     })
 
     afterEach(() => {
@@ -23,7 +25,7 @@ describe('Testing product component', () => {
     })
 
     test('SHOULD render h1 with error WHEN getProduct returns error value', (done) => {
-        const spyDidMount = jest.spyOn(Product.prototype, 'componentDidMount');
+        const spyDidMount = jest.spyOn(component.instance(), 'componentDidMount');
         const spyApiServiceProduct = jest.spyOn(apiService, 'getProduct').mockResolvedValue({
             error: true,
             message: 'some err'
@@ -48,7 +50,7 @@ describe('Testing product component', () => {
     })
 
     test('SHOULD render product container with reviews WHEN getProduct returns product data', (done) => {
-        const spyDidMount = jest.spyOn(Product.prototype, 'componentDidMount');
+        const spyDidMount = jest.spyOn(component.instance(), 'componentDidMount');
         const product = {
             currency: '$',
             price: 39,

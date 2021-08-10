@@ -39,5 +39,6 @@ I'm either missing something in the API documentation. Or it's a `cors origin` i
 - Should've pain more attention to specific versions of react, running into all sorts of problems with `Enzyme`. I know `@wojtekmaj/enzyme-adapter-react-17` is not an official package.
 But it works for this case.
 
+
 - Usually in projects, the first thing I do is add state. However, considering the complexity of this project. I initially decided against it. At this moment I decided to add a simple shopping basket,
 therefore `Redux` state was a late addition.
