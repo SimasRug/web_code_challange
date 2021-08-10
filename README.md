@@ -42,3 +42,6 @@ But it works for this case.
 
 - Usually in projects, the first thing I do is add state. However, considering the complexity of this project. I initially decided against it. At this moment I decided to add a simple shopping basket,
 therefore `Redux` state was a late addition.
+
+
+- `Bug` Just noticed that basket has a bug, if there's more than one of the same item. And user clicks `remove item` it removes all the item. Prob not the best idea to add more than one item with same id to the state.

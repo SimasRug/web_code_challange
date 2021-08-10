@@ -32,6 +32,8 @@ class Basket extends React.Component {
                                         <div className='basket-item-info'>
                                             <span>{name}</span>
                                             <span>{currency}{price}</span>
+                                            // TODO just noticed a bug, because the id is the same if you have multiple of the same product, it removes all of them
+                                            // probably best to have a dropdown with how many of the same item is in the basket..
                                             <button className='remove-item-btn' onClick={() => this.remove(id)}>Remove</button>
                                         </div>
                                     </div>
