@@ -7,8 +7,9 @@ import {connect} from 'react-redux';
 class Navbar extends React.Component {
 
     listLength() {
-        if (this.props.itemsLength) {
-            return (<span>({this.props.itemsLength})</span>)
+        if (this.props.itemsAmount.length) {
+            const amountSum = this.props.itemsAmount.reduce((acc, cur) => acc + cur);
+            return (<span>({amountSum})</span>)
         }
     }
 
@@ -31,7 +32,7 @@ class Navbar extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        itemsLength: state.basketReducer.items.length
+        itemsAmount: state.basketReducer.items.map(({amount}) => amount)
     }
 }
 
