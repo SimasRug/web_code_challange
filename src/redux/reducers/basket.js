@@ -1,4 +1,4 @@
-import {ADD_ITEM, REMOVE_ITEM} from '../actionTypes';
+import {ADD_ITEM, REMOVE_ITEM, CHANGE_AMOUNT} from '../actionTypes';
 
 const initialState = {
     items: []
@@ -30,6 +30,18 @@ export function basketReducer(state = initialState, action) {
                 ...state,
                 items
             }
+        }
+
+        case CHANGE_AMOUNT: {
+            const {id, amount} = action.payload;
+            const itemsCopy = [...state.items];
+            const itemIndex = itemsCopy.findIndex((item) => id === item.id);
+            itemsCopy[itemIndex].amount = amount;
+            return {
+                ...state,
+                items: itemsCopy
+            }
+
         }
         default:
             return state;
